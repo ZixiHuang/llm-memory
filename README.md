@@ -1,4 +1,4 @@
-# My Agent Project
+# LLM Memory Benchmark
 
 A project-specific implementation using the Local Agent Orchestrator framework.
 
