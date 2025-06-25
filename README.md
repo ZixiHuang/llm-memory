@@ -1,4 +1,4 @@
-# LLM Memory Benchmark
+# Long-term Agent Memory Benchmark
 
 A project-specific implementation using the Local Agent Orchestrator framework.
 
