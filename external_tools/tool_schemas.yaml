@@ -1,68 +1,27 @@
 - type: function
   function:
-    name: explore_neighbors
-    description: Explore the neighbors of the current node to see what nodes are available to move to
+    name: inspect
+    description: "List neighbors (node, weight) at the current node."
     parameters:
       type: object
-      properties:
-        node_id:
-          type: string
-          description: The ID of the current node to explore neighbors for
-      required:
-        - node_id
+      properties: {}
 
 - type: function
   function:
-    name: move_to_node
-    description: Move to a specific neighbor node and get information about that node
+    name: move
+    description: "Move to neighbor node v and return its neighbors."
     parameters:
       type: object
       properties:
-        target_node_id:
-          type: string
-          description: The ID of the node to move to
-      required:
-        - target_node_id
+        v: {type: integer}
 
 - type: function
   function:
-    name: check_if_goal
-    description: Check if the current node is the goal node
-    parameters:
-      type: object
-      properties:
-        node_id:
-          type: string
-          description: The ID of the current node to check
-      required:
-        - node_id
-
-- type: function
-  function:
-    name: submit_path
-    description: Submit the final path from start to goal
+    name: submit
+    description: "Submit a candidate path for optimality check."
     parameters:
       type: object
       properties:
         path:
           type: array
-          items:
-            type: string
-          description: List of node IDs representing the path from start to goal
-      required:
-        - path
-
-- type: function
-  function:
-    name: verify_path
-    description: Verify if the submitted path is the shortest path from start to goal
-    parameters:
-      type: object
-      properties:
-        path:
-          type: array
-          items:
-            type: string
-          description: List of node IDs representing the path from start to goal
-      required:
-        - path
+          items: {type: integer}

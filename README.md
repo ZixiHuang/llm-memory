@@ -5,7 +5,7 @@ A project-specific implementation using the Local Agent Orchestrator framework.
 ## Project Structure
 
 ```
-my-agent-project/
+llm-memory-project/
 ├── configs/                 # Configuration files
 ├── external_tools/          # Custom tools and schemas
 │   ├── __init__.py
