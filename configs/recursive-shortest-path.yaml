@@ -1,0 +1,50 @@
+# Configuration file for My Agent Project
+
+# Data configuration
+data:
+  dataset_path: "recursive_graph_data"  # We'll generate this programmatically
+  subset: "main"
+  split: "test"
+
+# Server configuration for OpenAI-compatible API
+server:
+  base_url: "http://localhost"
+  ports: 8088
+
+# Generation configuration for the language model
+generation:
+  model: "meta-llama/Llama-3.3-70B-Instruct"  # Replace with your model
+  temperature: 0.3  # Lower temperature for more deterministic path finding
+  top_p: 0.95
+
+# Tool configuration
+tool:
+  schema_path: "external_tools/tool_schemas.yaml"
+  handler: RecursiveShortestPathGame  # Custom Game
+
+# Game configuration
+max_steps: 50  # Maximum number of steps per episode
+
+# Template configuration
+template:
+  dir: "templates"
+  system_prompt_path: "system_prompt.jinja"
+  user_prompt_path: "user_prompt.jinja"
+  core_loop:
+    - call_type: "think"
+      additional_args: {}
+      next_template_path: "thinking_response.jinja"
+    - call_type: "action"
+      additional_args:
+        tools_avail:
+          - explore_neighbors
+          - move_to_node
+          - check_if_goal
+          - submit_path
+        retry_limit: 2
+      next_template_path: "action_response.jinja"
+
+# Verifier configuration
+verifier:
+  type: tool
+  tool_name: "verify_path"
