@@ -40,27 +40,28 @@ Jinja2 templates for system prompts, user prompts, and response guidance.
 
 ## Prerequisites
 
-1. Install the Local Agent Orchestrator framework:
+1. Install project dependencies:
+```bash
+conda create -n local-agent python=3.12
+conda activate local-agent
+pip install uv
+uv pip install vllm
+pip install datasets openai
+```
+
+2. Install the Local Agent Orchestrator framework:
 ```bash
 cd /path/to/local-agent-orchestrator
 pip install --editable .
 ```
 
-2. Set up your OpenAI-compatible language model server
-
-3. Install project dependencies:
-```bash
-pip install -r requirements.txt
-```
+3. Set up your OpenAI-compatible language model server
 
 ## Usage
 
 ```bash
 # Run the main script
-python src/main.py --config_file configs/config.yaml
-
-# Run with custom game handler
-python src/main.py --config_file configs/config.yaml --custom_game
+python -m src.main --config_file configs/shortest_path.yaml --log-level INFO
 ```
 
 ## Customization
