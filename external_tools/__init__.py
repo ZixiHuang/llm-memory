@@ -30,9 +30,9 @@ def observe() -> List[Tuple[int, float]]:
     return G.neighbors(_current)
 
 
-def move(v: int) -> List[Tuple[int, float]]:
+def move(v: int) -> str:
     """
-    Move the agent to neighbor `v`.  Returns the new node’s neighbor list.
+    Move the agent to neighbor `v`. Returns a confirmation string.
     Raises if v is not an outgoing neighbor.
     """
     assert G is not None and _current is not None
@@ -40,7 +40,7 @@ def move(v: int) -> List[Tuple[int, float]]:
         raise ValueError(f"{v} is not a neighbor of current node.")
     _path.append(v)
     globals()['_current'] = v
-    return G.neighbors(v)
+    return f"Moved to node {v}."
 
 
 def submit_solution(path: list[int]) -> bool:
@@ -49,10 +49,3 @@ def submit_solution(path: list[int]) -> bool:
     """
     assert G is not None
     return G.verify_shortest_path(path)
-
-
-def verify(submission: list[int]) -> bool:
-    """
-    Wrapper so verifier can call a tool with signature `(submission=...)`.
-    """
-    return submit_solution(submission)

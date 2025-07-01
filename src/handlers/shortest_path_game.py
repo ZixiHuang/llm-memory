@@ -1,6 +1,6 @@
 from local_workflow.environment import AbstractGame
 from external_tools import (
-    observe, move, submit_solution, verify, _init_graph, G, _current
+    observe, move, submit_solution, _init_graph, G, _current
 )
 import json
 import copy
