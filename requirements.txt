@@ -1,1 +1,0 @@
-local_workflow @ git+https://github.com/andrewwnlp/local-agent-orchestrator.git@main#egg=local_workflow

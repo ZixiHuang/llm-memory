@@ -1,40 +1,41 @@
-# Recursive-Shortest-Path task (no load_graph in tools)
+# Recursive-Shortest-Path task
+data: {}                  # ← no external dataset; we generate graphs on the fly
 
-data: {}
-
-server:
-  base_url: "http://localhost"
-  ports: 1234
+server:                  
+  base_url: http://localhost
+  ports: 8088
 
 generation:
   model: meta-llama/Llama-3.3-70B-Instruct
   temperature: 0.2
-  top_p: 0.9
+  top_p: .9
 
 tool:
   schema_path: "external_tools/tool_schemas.yaml"
-  handler: ShortestPathGame
+  handler: ShortestPathGame        # <— our new Game class
 
 template:
   dir: "templates"
   system_prompt_path: "system_prompt.jinja"
   user_prompt_path: "user_prompt.jinja"
   core_loop:
-    - call_type: "think"
+    - call_type: think
       additional_args: {}
-      next_template_path: "thinking_response.jinja"
-    - call_type: "action"
+      next_template_path: thinking_response.jinja
+    - call_type: action
       additional_args:
-        tools_avail: [inspect, move, submit]
+        tools_avail: [observe, move, submit_solution]
         retry_limit: 1
-      next_template_path: "action_response.jinja"
+      next_template_path: action_response.jinja
 
 verifier:
-  type: none
+  type: tool
+  tool_name: verify
 
-# graph-generation parameters
-base_nodes: 4
-max_edges: 2
-recursion_depth: 2
-weight_range: [1.0, 5.0]
-seed: 42
+# Parameters that will be injected into the game handler
+graph_params:
+  base_nodes: 6
+  max_edges: 3
+  recursion_depth: 0
+  weight_choices: [1.0, 2.0]
+  seed: 42

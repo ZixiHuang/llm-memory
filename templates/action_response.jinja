@@ -1,15 +1,17 @@
+You observe the following after your actions:
+
 {% if outcome %}
-Tool Result: {{ outcome }}
+{% if outcome is iterable and outcome is not string %}
+{% for tool_call in outcome %}
+ACTION:
+{{ tool_call.function.name }}
 
-{% if "REACHED GOAL" in outcome %}
-Congratulations! You've reached the goal. Now you should submit your complete path from start to finish.
-{% elif "Error" in outcome %}
-There was an error with your action. Please try again with a valid option.
-{% else %}
-Based on this result, what would you like to do next? Continue exploring or take another action.
-{% endif %}
-{% else %}
-No action was taken. What would you like to do next?
-{% endif %}
+OBSERVATION: 
+{{ tool_call.output }}
 
-Remember to think strategically about finding the shortest path to the goal.
+{% endfor %}
+{% else %}
+{{ outcome }}
+{% endif %}
+{% endif %}
+Reflect on your actions and their outcomes. Think logically and thoroughly.
