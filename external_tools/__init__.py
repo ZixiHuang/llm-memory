@@ -43,9 +43,18 @@ def move(v: int) -> str:
     return f"Moved to node {v}."
 
 
-def submit_solution(path: list[int]) -> bool:
+def submit_solution(submission: list[int]) -> bool:
     """
     Agent submits a candidate start→end path.  Returns True if **optimal**.
     """
     assert G is not None
-    return G.verify_shortest_path(path)
+    return G.verify_shortest_path(submission)
+
+
+def verify(submission: list[int]) -> bool:
+    """
+    Verifier function called by AbstractGame to check if submitted path is optimal.
+    This is the function referenced in the config's verifier.tool_name.
+    """
+    assert G is not None
+    return G.verify_shortest_path(submission)

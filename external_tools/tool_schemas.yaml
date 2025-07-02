@@ -24,7 +24,7 @@
     parameters:
       type: object
       properties:
-        path:
+        submission:
           type: array
           items: {type: integer}
           description: "Sequence of node IDs from start to end"
