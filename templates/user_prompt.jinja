@@ -1,3 +1,8 @@
-What is the shortest path from {{ start_node }} to {{ goal_node }} in this weighted graph?
+Find the shortest path from node {{ start_node }} to node {{ goal_node }}. You start at node {{ current_node if current_node is defined else start_node }}.  
 
-Start exploring from node {{ current_node if current_node is defined else start_node }}.
+Use Dijkstra’s method:
+- Maintain a distance map from start → each node.
+- Always pick the unvisited node with the smallest distance.
+- Explore its neighbors, update distances, and repeat.
+
+Begin in THINK mode.

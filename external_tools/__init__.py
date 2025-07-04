@@ -27,7 +27,8 @@ def observe() -> List[Tuple[int, float]]:
     Returns a list of (neighbor_id, weight) pairs for the current node.
     """
     assert G is not None and _current is not None
-    return G.neighbors(_current)
+    return [{"neighbor": nid, "weight": w} for nid, w in G.neighbors(_current)]
+
 
 
 def move(v: int) -> str:
@@ -37,10 +38,11 @@ def move(v: int) -> str:
     """
     assert G is not None and _current is not None
     if v not in [dst for dst, _ in G.neighbors(_current)]:
-        raise ValueError(f"{v} is not a neighbor of current node.")
+        # raise ValueError(f"{v} is not a neighbor of current node.")
+        return f"node {v} is not a neighbor of current node."
     _path.append(v)
     globals()['_current'] = v
-    return f"Moved to node {v}."
+    return f"moved to node {v}."
 
 
 def submit_solution(submission: list[int]) -> bool:
