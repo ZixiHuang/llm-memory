@@ -27,17 +27,19 @@ def observe() -> List[Tuple[int, float]]:
     Returns a list of (neighbor_id, weight) pairs for the current node.
     """
     assert G is not None and _current is not None
-    return [{"neighbor": nid, "weight": w} for nid, w in G.neighbors(_current)]
+    return [(nid, w) for nid, w in G.neighbors(_current)]
 
 
 
 def move(v: int) -> str:
     """
     Move the agent to neighbor `v`. Returns a confirmation string.
-    Raises if v is not an outgoing neighbor.
+    Uses undirected exploration - agent can move along edges in both directions.
+    Raises if v is not an undirected neighbor.
     """
     assert G is not None and _current is not None
-    if v not in [dst for dst, _ in G.neighbors(_current)]:
+    undirected_neighbors = G.undirected_neighbors(_current)
+    if v not in undirected_neighbors:
         # raise ValueError(f"{v} is not a neighbor of current node.")
         return f"node {v} is not a neighbor of current node."
     _path.append(v)

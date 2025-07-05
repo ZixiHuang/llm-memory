@@ -1,7 +1,7 @@
 - type: function
   function:
     name: observe
-    description: "List the (neighbor_id, weight) pairs at the agent's current node"
+    description: "List the (neighbor_id, weight) pairs at the agent's current node. Only shows outgoing edges (valid directed edges)."
     parameters:
       type: object
       properties: {}
@@ -9,7 +9,7 @@
 - type: function
   function:
     name: move
-    description: "Move to a neighbor node v and return its neighbor list"
+    description: "Move to a neighbor node v. Uses undirected exploration - agent can move along edges in both directions."
     parameters:
       type: object
       properties:

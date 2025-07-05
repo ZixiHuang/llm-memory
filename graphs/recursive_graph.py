@@ -30,6 +30,26 @@ class Graph:
     def neighbors(self, u: int) -> List[Tuple[int, float]]:
         return self.adj.get(u, [])
 
+    def undirected_neighbors(self, u: int) -> List[int]:
+        """
+        Return neighbor node IDs for undirected exploration - includes both outgoing and incoming edges.
+        For incoming edges, we traverse the graph to find all nodes that have edges to u.
+        Returns only node IDs, no weights.
+        """
+        neighbors_set = set()
+        
+        # Add outgoing neighbors
+        for v, w in self.adj.get(u, []):
+            neighbors_set.add(v)
+        
+        # Add incoming neighbors (reverse direction)
+        for node, edges in self.adj.items():
+            for target, weight in edges:
+                if target == u and node != u:
+                    neighbors_set.add(node)
+        
+        return list(neighbors_set)
+
     def n_nodes(self) -> int:
         return len(self.adj)
 
